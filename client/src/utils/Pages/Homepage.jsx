@@ -1,5 +1,6 @@
 import Dashboard from "./Dashborad/Dashborad";
 import AddProduct from "./Inventory/AddProduct";
+import ProductPage from "./Inventory/ProductPage";
 import LeftSideNav from "./LeftSideNav"
 import TopNavbar from "./TopNavbar"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,7 +25,8 @@ function Homepage(){
           <div className="p-6 flex-1 overflow-y-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              {/* <Route path="/addproduct" element={<AddProduct />} /> */}
+              <Route path="/product" element={<ProductPage />} />
+              <Route path="/add-product" element={<AddProduct />} />
             </Routes>
           </div>
         </div>
