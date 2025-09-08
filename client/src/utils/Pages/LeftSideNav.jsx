@@ -26,27 +26,21 @@ export default function LeftSideNav() {
         {/* Navigation */}
         <nav className="mt-4 space-y-1">
           
-          <Link 
-            to="/inventory" 
-            className="flex items-center px-6 py-3 text-white bg-black rounded-lg font-medium"
-          >
-          Inventory
-          </Link>
+      <Link
+        to="/"
+        className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white rounded-lg font-medium"
+      >
+        <LayoutDashboard className="w-5 h-5 mr-3" />
+        Dashboard
+      </Link>
 
-          {/* <a
-            href="#"
-            className="flex items-center px-6 py-3 text-white bg-black rounded-lg font-medium"
-          >
-            <LayoutDashboard className="w-5 h-5 mr-3" />
-            Dashboard
-          </a> */}
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white hover:rounded-lg font-medium"
-          >
-            <Package className="w-5 h-5 mr-3" />
-            Inventory
-          </a>
+      <Link
+        to="/addproduct"
+        className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white rounded-lg font-medium"
+      >
+        <Package className="w-5 h-5 mr-3" />
+        Inventory
+      </Link>
           <a
             href="#"
             className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white hover:rounded-lg font-medium"

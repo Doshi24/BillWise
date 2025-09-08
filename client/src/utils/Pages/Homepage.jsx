@@ -1,3 +1,5 @@
+import Dashboard from "./Dashborad/Dashborad";
+import AddProduct from "./Inventory/AddProduct";
 import LeftSideNav from "./LeftSideNav"
 import TopNavbar from "./TopNavbar"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,11 +22,10 @@ function Homepage(){
 
           {/* Page Content */}
           <div className="p-6 flex-1 overflow-y-auto">
-            {/* <Routes>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/inventory" element={<InventoryPage />} />
-              <Route path="/suppliers" element={<SuppliersPage />} />
-            </Routes> */}
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              {/* <Route path="/addproduct" element={<AddProduct />} /> */}
+            </Routes>
           </div>
         </div>
       </div>
