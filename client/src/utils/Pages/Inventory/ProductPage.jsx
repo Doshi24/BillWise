@@ -47,16 +47,16 @@
         }
     };
 
-    //   // Download CSV
-    //   const handleDownload = () => {
-    //     const query = new URLSearchParams(filters).toString();
-    //     const link = document.createElement("a");
-    //     link.href = `${server_url}product/list/download?${query}`;
-    //     link.setAttribute("download", "products.csv");
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    //   };
+      // Download CSV
+      const handleDownload = () => {
+        const query = new URLSearchParams(filters).toString();
+        const link = document.createElement("a");
+        link.href = `${server_url}/product/list/download?${query}`;
+        link.setAttribute("download", "products.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
 
     return (
         <div className="min-h-screen bg-gray-100 p-8">
@@ -93,7 +93,7 @@
             <div className="flex space-x-3">
             <FilterMenu onFilter={handlefilter} />
             <button
-                // onClick={handleDownload}
+                onClick={handleDownload}
                 className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center"
             >
                 <Download className="w-5 h-5 mr-2" />
