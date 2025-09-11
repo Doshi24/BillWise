@@ -37,8 +37,9 @@ const AddProduct = ({onClose}) => {
         body: JSON.stringify(formData),
       });
       console.log("Response received", response);
+      const responseData = await response.json();
       if (response.ok) {
-        showToast("success", "Product added successfully!");
+        showToast("success", responseData.message || "Product added successfully!");
         setFormData({
           product_code: "",
           name: "",
@@ -54,20 +55,20 @@ const AddProduct = ({onClose}) => {
         // navigate("/product");
         if (onClose) onClose();
       } else {
-        showToast("error", "Failed to add product.");
+        showToast("error", responseData.message ||"Failed to add product.");
       }
     } catch (error) {
-      showToast("error", "Something went wrong.");
+      showToast("error", responseData.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center bg-gray-100 min-h-screen p-6">
+    <div className="flex justify-center bg-gray-100 border border-gray-500 rounded-2xl  p-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col"
+        className="w-full max-w-5xl bg-white border border-gray-500 rounded-2xl shadow-lg overflow-hidden flex flex-col"
       >
         {/* Header */}
         <div className="bg-gray-900 text-white px-6 py-4">

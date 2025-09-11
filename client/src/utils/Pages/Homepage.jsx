@@ -3,6 +3,7 @@ import AddProduct from "./Inventory/AddProduct";
 import ProductPage from "./Inventory/ProductPage";
 import LeftSideNav from "./LeftSideNav"
 import TopNavbar from "./TopNavbar"
+import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function Homepage(){
     
@@ -31,6 +32,7 @@ function Homepage(){
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" />
     </Router>
   );
 }

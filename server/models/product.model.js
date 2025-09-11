@@ -3,8 +3,8 @@ import {sql } from "../utils/dbconfig.js";
 import { Parser } from "json2csv";
 
 const setnewproduct = async (req, res) => {
+    let product = req.body;
     try {
-        let product = req.body;
         const date = new Date();
         logger.info("product details "+JSON.stringify(product));
         // logger.info("product details111 "+JSON.stringify(newproduct));
@@ -14,7 +14,7 @@ const setnewproduct = async (req, res) => {
         return res.json({status: "success", error: "", message : "New Product Added Successfully !!!" ,result : product });
     
     } catch (error) {
-        return res.json({status: "unsuccess", error: error, message : error ,result : product });
+        return res.status(500).json({status: "unsuccess", error: "", message :  "Database error" ,result : product });
     }}   
 
 

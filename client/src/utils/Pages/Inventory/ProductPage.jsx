@@ -1,5 +1,5 @@
     import React, { useEffect, useState } from "react";
-    import { Download, Filter, Plus } from "lucide-react";
+    import { Download, Filter, Plus , Search } from "lucide-react";
     import { server_url } from "../../config.js";
     import FilterMenu from "../FilterMenu";
     import AddProduct from "./AddProduct"
@@ -7,7 +7,7 @@
     function ProductPage() {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 8;
     const [filters, setFilters] = useState({ product_code: "", name: "" });
     const [search, setSearch] = useState("");
     const [showAddForm, setShowAddForm] = useState(false);
@@ -65,7 +65,7 @@
             <h2 className="text-2xl font-semibold text-gray-900">
             Inventory Management
             </h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 font-bold">
             Manage your wholesale product catalog and profit margins
             </p>
         </div>
@@ -73,13 +73,18 @@
         {/* Search + Actions */}
         <div className="flex justify-between items-center mb-6">
             {/* Search Bar */}
+            <div className="relative w-1/2">
+            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
-            type="text"
-            placeholder="Search products by name or SKU..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                type="text"
+                placeholder="Search products by name or SKU..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black bg-white"
             />
+            </div>
+            {/* Actions */}
+            <div className="flex space-x-3">
             {/* Add Product Button */}
             <button
                 onClick={toggleAddForm}
@@ -88,9 +93,6 @@
             <Plus className="w-5 h-5 mr-2" />
                 Add Product
             </button>
-
-            {/* Actions */}
-            <div className="flex space-x-3">
             <FilterMenu onFilter={handlefilter} />
             <button
                 onClick={handleDownload}
