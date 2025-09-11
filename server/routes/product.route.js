@@ -11,7 +11,7 @@ router.route('/new').post(setnewproduct);
 // router.route('/select/:product_code').get(selectproduct)//select product details
 // router.route('/update').post(Updateproduct)// update product details
 router.route('/display').get(DisplayProduct)// diplay products
-// router.route('/filter').get(FilterProduct);// filter product
+router.route('/filter').get(FilterProduct);// filter product
 
 
 

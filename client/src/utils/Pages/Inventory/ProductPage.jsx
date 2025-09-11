@@ -38,7 +38,7 @@
         try {
         setFilters(filters);
         const filtersearch = new URLSearchParams(filters).toString();
-        const result = await fetch(`${server_url}product/filter?${filtersearch}`);
+        const result = await fetch(`${server_url}/product/filter?${filtersearch}`);
         const displayresult = await result.json();
         setData(displayresult.result || []);
         setPage(1);

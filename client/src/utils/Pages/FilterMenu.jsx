@@ -47,6 +47,7 @@ function FilterMenu({ onFilter }) {
               value={filters.product_code}
               onChange={handleChange}
               placeholder="Product Code"
+              autoComplete="off"
               className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
             />
             <input
@@ -55,6 +56,7 @@ function FilterMenu({ onFilter }) {
               value={filters.name}
               onChange={handleChange}
               placeholder="Product Name"
+              autoComplete="off"
               className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
             />
           </div>
