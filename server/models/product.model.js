@@ -27,7 +27,9 @@ try {
     qry = await sql("select * from products where product_code like '%"+searchcode.query+"%'  ");
     logger.info("select * from products where product_code like '%"+searchcode.query+"%'  ")
     logger.info("search product "+JSON.stringify(qry));
-    res.json(qry);
+    // res.json(qry);
+    return res.json({status: "success", error: "", message : "Searched producted" ,result : qry });
+
 } catch (error) {
     logger.error("error in search product "+error);
     return res.json({status: "unsuccess", error: error, message : error  });

@@ -58,6 +58,34 @@
         document.body.removeChild(link);
       };
 
+
+      // seach product logic
+const [searchquery, setSearchquery] = useState("");
+
+useEffect(() => {
+  const fetchSearchResults = async () => {
+    try {
+      if (searchquery.length >= 1) {
+        // search API
+        const res = await fetch(`${server_url}/product/search?query=${searchquery}`);
+        const result = await res.json();
+        setData(result.result || []); // update table with search result
+        setPage(1); // reset pagination
+      } else {
+        // fetch all products if search is empty
+        const res = await fetch(`${server_url}/product/display`);
+        const result = await res.json();
+        setData(result.result || []); // update table with full product list
+        setPage(1);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  fetchSearchResults();
+}, [searchquery]);
+
     return (
         <div className="min-h-screen bg-gray-100 p-8">
         {/* Header */}
@@ -77,9 +105,9 @@
             <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
                 type="text"
-                placeholder="Search products by name or SKU..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search products by code"
+                value={searchquery}
+                onChange={(e) => setSearchquery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black bg-white"
             />
             </div>
