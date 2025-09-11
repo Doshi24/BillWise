@@ -95,6 +95,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="Unique Value"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -107,6 +108,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="Product Name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -118,6 +120,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.description}
                   onChange={handleChange}
                   autoComplete="off"
+                  placeholder="Product Description"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -130,6 +133,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="Value in numbers"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -151,6 +155,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="Value in numbers"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -162,6 +167,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.tax_rate}
                   onChange={handleChange}
                   autoComplete="off"
+                  placeholder="Value in numbers"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -173,6 +179,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.tax_code_id}
                   onChange={handleChange}
                   autoComplete="off"
+                  placeholder="E.g., GST, VAT"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -194,6 +201,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="E.g., Electronics"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -206,6 +214,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="E.g., Topic"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -218,6 +227,7 @@ const AddProduct = ({onClose}) => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
+                  placeholder="E.g., pcs, kg"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
