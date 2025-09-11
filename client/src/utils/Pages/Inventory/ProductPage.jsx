@@ -1,32 +1,32 @@
     import React, { useEffect, useState } from "react";
     import { Download, Filter, Plus } from "lucide-react";
-    // import { server_url } from "../../utils/servicemanger.js";
+    import { server_url } from "../../config.js";
     import FilterMenu from "../FilterMenu";
     import AddProduct from "./AddProduct"
 
     function ProductPage() {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = 10;
     const [filters, setFilters] = useState({ product_code: "", name: "" });
     const [search, setSearch] = useState("");
     const [showAddForm, setShowAddForm] = useState(false);
 
     const toggleAddForm = () => setShowAddForm((prev) => !prev);
 
-    //   // Fetch product data
-    //   useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const res = await fetch(`${server_url}product/display`);
-    //         const json = await res.json();
-    //         setData(json.result || []);
-    //       } catch (err) {
-    //         console.error("❌ Error fetching products:", err);
-    //       }
-    //     };
-    //     fetchData();
-    //   }, []);
+      // Fetch product data
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await fetch(`${server_url}/product/display`);
+            const json = await res.json();
+            setData(json.result || []);
+          } catch (err) {
+            console.error("❌ Error fetching products:", err);
+          }
+        };
+        fetchData();
+      }, []);
 
     // Pagination logic
     const startIndex = (page - 1) * itemsPerPage;
