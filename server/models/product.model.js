@@ -3,17 +3,21 @@ import {sql } from "../utils/dbconfig.js";
 import { Parser } from "json2csv";
 
 const setnewproduct = async (req, res) => {
-    let product = req.body;
-    const date = new Date();
-    logger.info("product details "+JSON.stringify(product));
-    // logger.info("product details111 "+JSON.stringify(newproduct));
-    let newproduct = await sql("insert into products (product_code, name, description, per_unit_price, tax_rate, category_id, brand_id, unit_of_measure, tax_code_id, stock_quantity) values ('"+product.product_code+"', '"+product.name+"','"+product.description+"','"+product.per_unit_price+"','"+product.tax_rate+"','"+product.category_id+"','"+product.brand_id+"','"+product.unit_of_measure+"','"+product.tax_code_id+"', '"+product.stock_quantity+"' )") 
-    logger.info("product details111 "+JSON.stringify(newproduct));
-    res.status(200).json({ message: "new product added", result : product } );
-    logger.info("new product added"+JSON.stringify(newproduct) );
-}
+    try {
+        let product = req.body;
+        const date = new Date();
+        logger.info("product details "+JSON.stringify(product));
+        // logger.info("product details111 "+JSON.stringify(newproduct));
+        let newproduct = await sql("insert into products (product_code, name, description, per_unit_price, tax_rate, category_id, brand_id, unit_of_measure, tax_code_id, stock_quantity) values ('"+product.product_code+"', '"+product.name+"','"+product.description+"','"+product.per_unit_price+"','"+product.tax_rate+"','"+product.category_id+"','"+product.brand_id+"','"+product.unit_of_measure+"','"+product.tax_code_id+"', '"+product.stock_quantity+"' )") 
+        logger.info("product details111 "+JSON.stringify(newproduct));
+        logger.info("new product added"+JSON.stringify(newproduct) );
+        return res.json({status: "success", error: "", message : "New Product Added Successfully !!!" ,result : product });
+    
+    } catch (error) {
+        return res.json({status: "unsuccess", error: error, message : error ,result : product });
+    }}   
 
-logger.info("search product function called");
+
 const searchproduct = async (req, res) => {
     let searchcode = req.query;
     logger.info("search code "+JSON.stringify(searchcode));
@@ -26,6 +30,7 @@ try {
     res.json(qry);
 } catch (error) {
     logger.error("error in search product "+error);
+    return res.json({status: "unsuccess", error: error, message : error  });
 }
 }
 
@@ -42,6 +47,7 @@ const selectproduct = async (req, res) => {
         res.json(qry[0]);
     } catch (error) {
         logger.error("error in select product "+error);
+        return res.json({status: "unsuccess", error: error, message : error });
     }
 }
 
@@ -67,10 +73,11 @@ const Updateproduct = async (req, res) => {
         const qry = await sql(`update products set ${params.join(", ")} where product_code = ?`, [...valuess, product.product_code] );
         logger.info(`update products set ${params.join(", ")} where product_code = ?`);
         logger.info("product updated "+JSON.stringify(qry));
-        res.status(200).json({ message: "product updated", result: product });
+        // res.status(200).json({ message: "product updated", result: product });
+        return res.json({status: "success", error: "", message : "Product Updated Successfully !!!" ,result : product });
     } catch (error) {
         logger.error("error in update product "+error);
-        res.status(500).json({ message: "internal server error" } );
+        return res.json({status: "unsuccess", error: error, message : error  });
     }
 }
 
@@ -78,7 +85,7 @@ const DisplayProduct  = async (req, res) => {
     var  dqry = {}
     dqry = await sql("select * from Products")
     logger.info("Display product" +JSON.stringify(dqry))
-    res.status(200).json({message : "", result : dqry })
+    return res.json({status: "success", error: "", message : "Product Displayed Successfully !!!" ,result : dqry });
 }
 
 
@@ -108,9 +115,9 @@ const DisplayProduct  = async (req, res) => {
             
             qry= await sql(qry)
     
-            res.status(200).json({result: qry})
+            return res.json({status: "success", error: "", message : "Filter Product return Successfully !!!" ,result : qry });
         } catch (error) {
-            logger.info("error eccored",error)
+            return res.json({status: "unsuccess", error: error, message : error ,result : qry });
     }
 }
 
@@ -122,7 +129,8 @@ const DownloadProducts = async (req, res) => {
         
         if (!qry || qry.length === 0) {
             logger.info("no filter found so downloaded all the products")
-            return res.status(404).json({ message: "No products found" });
+            // return res.status(404).json({ message: "No products found" });
+            return res.json({status: "success", error: "", message : "No products found !!!"  });
         }
         let  DPQRY_filter = await sql(qry)
         let data = new Parser()
@@ -130,9 +138,10 @@ const DownloadProducts = async (req, res) => {
 
         res.header("content-type","text/csv");
         res.attachment("products.csv");
-        res.status(200).send(file)
+        res.send(file);
+        // return res.json({status: "success", error: "", message : "Product File Downloaded Successfully !!!" ,result : send(file) });
     } catch (error) {
-        console.log("file not downloaded" ,error)
+        return res.json({status: "unsuccess", error: error, message : error  });
     }
 }
 
