@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Loader from "../../utils/Loader.jsx"; 
-// import { server_url } from "../../utils/servicemanger.js";
-// import showToast from "../../utils/Toast.jsx";
+import Loader from "../../Loader.jsx";
+import { server_url } from "../../config.js";
+import showToast from "../../Toast.jsx";
 
 const AddProduct = ({onClose}) => {
   const navigate = useNavigate();
@@ -26,15 +26,17 @@ const AddProduct = ({onClose}) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("Form submitted", formData);
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await fetch(`${server_url}product/new`, {
+      console.log("Form submitted", formData);
+      const response = await fetch(`${server_url}/product/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      console.log("Response received", response);
       if (response.ok) {
         showToast("success", "Product added successfully!");
         setFormData({
@@ -82,7 +84,7 @@ const AddProduct = ({onClose}) => {
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
               General Details
             </h3>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-4 gap-6">
               <div>
                 <label className="block text-gray-700 mb-2">Product Code *</label>
                 <input
@@ -91,6 +93,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.product_code}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -102,6 +105,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -112,6 +116,19 @@ const AddProduct = ({onClose}) => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
+                  autoComplete="off"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 mb-2">Quantity *</label>
+                <input
+                  type="text"
+                  name="stock_quantity"
+                  value={formData.stock_quantity}
+                  onChange={handleChange}
+                  required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -132,6 +149,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.per_unit_price}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -142,6 +160,7 @@ const AddProduct = ({onClose}) => {
                   name="tax_rate"
                   value={formData.tax_rate}
                   onChange={handleChange}
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -152,6 +171,7 @@ const AddProduct = ({onClose}) => {
                   name="tax_code_id"
                   value={formData.tax_code_id}
                   onChange={handleChange}
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -172,6 +192,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.category_id}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -183,6 +204,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.brand_id}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -194,6 +216,7 @@ const AddProduct = ({onClose}) => {
                   value={formData.unit_of_measure}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 bg-gray-50"
                 />
               </div>
@@ -202,7 +225,7 @@ const AddProduct = ({onClose}) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-50 px-6 py-4 border-t flex justify-end gap-4">
+        <div className="bg-gray-100 px-6 py-4 border-t flex justify-end gap-4">
         <button
           type="button"
           onClick={onClose} // ✅ Close modal on Cancel

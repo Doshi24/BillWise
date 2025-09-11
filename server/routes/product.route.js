@@ -7,11 +7,11 @@ import { pcode } from '../middleware/datalist.js';
 const router = express.Router();
 logger.info("Router called"+JSON.stringify(router));
 router.route('/new').post(setnewproduct);
-router.route('/search').get(searchproduct) /// fetch search product
-router.route('/select/:product_code').get(selectproduct)//select product details
-router.route('/update').post(Updateproduct)// update product details
-router.route('/display').get(DisplayProduct)// diplay products
-router.route('/filter').get(FilterProduct);// filter product
+// router.route('/search').get(searchproduct) /// fetch search product
+// router.route('/select/:product_code').get(selectproduct)//select product details
+// router.route('/update').post(Updateproduct)// update product details
+// router.route('/display').get(DisplayProduct)// diplay products
+// router.route('/filter').get(FilterProduct);// filter product
 
 
 

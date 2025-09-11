@@ -13,11 +13,11 @@ import router from './routes/product.route.js';
 //route use 
 
 main.use('/product', router);
-main.use('/product', router);// for search
-main.use('/product', router);// for select
-main.use('/product', router);// for update
-main.use('products',router); // for display
-main.use('/product',router); //filter
+// main.use('/product', router);// for search
+// main.use('/product', router);// for select
+// main.use('/product', router);// for update
+// main.use('products',router); // for display
+// main.use('/product',router); //filter
 
 
 // downloads
