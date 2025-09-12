@@ -6,7 +6,7 @@ switch (type) {
       toast.success(message, { autoClose: 2000 });
       break;
     case "error":
-      toast.error(message, { autoClose: 5000 });
+      toast.error(message, { autoClose: 10000 });
       break;
     case "warn":
       toast.warn(message, { autoClose: 4500 });

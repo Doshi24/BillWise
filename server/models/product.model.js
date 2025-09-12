@@ -14,7 +14,11 @@ const setnewproduct = async (req, res) => {
         return res.json({status: "success", error: "", message : "New Product Added Successfully !!!" ,result : product });
     
     } catch (error) {
-        return res.status(500).json({status: "unsuccess", error: "", message :  "Database error" ,result : product });
+        logger.error("error in adding new product "+error);
+        if(error.code === 'ER_DUP_ENTRY'){
+            return res.status(400).json({status: "unsuccess", error: "Duplicate Entry", message :  "Product with this Product Code already exists. Please use a different Product Code." ,result : product });
+        }
+        return res.status(500).json({status: "unsuccess", error: "", message :  "Something went wrong while saving product. Please try again.  Check All the Fields are have Proper Value" ,result : product });
     }}   
 
 
