@@ -117,8 +117,8 @@ useEffect(() => {
             <div className="flex space-x-3">
             {/* Add Product Button */}
             <button
-                // onClick={toggleAddForm}
-                onClick={() => navigate("/add-product")}
+                onClick={toggleAddForm}
+                // onClick={() => navigate("/add-product")}
                 className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center"
             >
             <Plus className="w-5 h-5 mr-2" />
