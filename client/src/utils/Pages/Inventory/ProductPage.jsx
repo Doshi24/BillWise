@@ -4,6 +4,7 @@
     import FilterMenu from "../FilterMenu";
     import AddProduct from "./AddProduct"
     import { useNavigate } from "react-router-dom";
+import Updateproduct from "./UpdateProduct.jsx";
 
     function ProductPage() {
     const [data, setData] = useState([]);
@@ -13,8 +14,10 @@
     const [search, setSearch] = useState("");
     const [showAddForm, setShowAddForm] = useState(false);
     const navigate = useNavigate();
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
 
     const toggleAddForm = () => setShowAddForm((prev) => !prev);
+    const toggleUpdateForm = () => setShowUpdateForm((prev) => !prev);
 
       // Fetch product data
       useEffect(() => {
@@ -88,6 +91,21 @@ useEffect(() => {
   fetchSearchResults();
 }, [searchquery]);
 
+// fetch latest products 
+const fetchProducts = async () => {
+  try {
+    const res = await fetch(`${server_url}/product/display`);
+    const json = await res.json();
+    setData(json.result || []);
+    setPage(1); // optional: reset to page 1
+  } catch (err) {
+    console.error("❌ Error fetching products:", err);
+  }
+};
+useEffect(()=>{
+  fetchProducts()
+},[])
+
     return (
         <div className="min-h-screen bg-gray-100 p-8">
         {/* Header */}
@@ -124,6 +142,14 @@ useEffect(() => {
             <Plus className="w-5 h-5 mr-2" />
                 Add Product
             </button>
+            <button
+                onClick={toggleUpdateForm}
+                // onClick={() => navigate("/add-product")}
+                className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center"
+            >
+            <Plus className="w-5 h-5 mr-2" />
+                Update Product
+            </button>
             <FilterMenu onFilter={handlefilter} />
             <button
                 onClick={handleDownload}
@@ -141,9 +167,27 @@ useEffect(() => {
 
                 {/* Modal Form */}
                 <div className="relative w-1/2 max-w-3xl h-auto my-5 rounded-2xl shadow-lg overflow-y-auto bg-white z-50">
-                <AddProduct onClose={() => setShowAddForm(false)} />
+                <AddProduct onClose={() => setShowAddForm(false)} 
+                onSuccess={fetchProducts}  
+                />
                 </div>
             </div>
+        )}
+        {showUpdateForm && (
+          <div className="fixed inset-0 flex items-start justify-center z-50">
+            {/* Blur Background */}
+            <div
+              className="absolute inset-0 bg-white/30 backdrop-blur-sm"
+              onClick={() => setShowUpdateForm(false)}
+            ></div>
+
+            {/* Modal Form */}
+            <div className="relative w-1/2 max-w-3xl h-auto my-5 rounded-2xl shadow-lg overflow-y-auto bg-white z-50">
+              <Updateproduct onClose={() => setShowUpdateForm(false)} 
+                onSuccess={fetchProducts}
+              />
+            </div>
+          </div>
         )}
 
         {/* Table */}

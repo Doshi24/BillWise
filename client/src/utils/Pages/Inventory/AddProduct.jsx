@@ -4,7 +4,7 @@ import Loader from "../../Loader.jsx";
 import { server_url } from "../../config.js";
 import showToast from "../../Toast.jsx";
 
-const AddProduct = ({onClose}) => {
+const AddProduct = ({onClose, onSuccess}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -52,8 +52,9 @@ const AddProduct = ({onClose}) => {
           unit_of_measure: "",
           stock_quantity: "",
         });
-        navigate("/product");
-        if (onClose) onClose();
+        // navigate("/product");
+        if (onClose) onClose(); // close modal
+        if (onSuccess) onSuccess(); // r
       } else {
         showToast("error", responseData.message ||"Failed to add product.");
       }
@@ -65,7 +66,7 @@ const AddProduct = ({onClose}) => {
   };
 
   return (
-    <div className="flex justify-center bg-gray-100 border border-gray-500 rounded-2xl  p-6">
+    <div className="flex justify-center bg-gray-100 border border-gray-500 rounded-2xl  p-3">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-5xl bg-white border border-gray-500 rounded-2xl shadow-lg overflow-hidden flex flex-col"
