@@ -1,5 +1,5 @@
     import React, { useEffect, useState } from "react";
-    import { Download, Filter, Plus , Search } from "lucide-react";
+    import { Download, Filter, Plus , Search , PenLine} from "lucide-react";
     import { server_url } from "../../config.js";
     import FilterMenu from "../FilterMenu";
     import AddProduct from "./AddProduct"
@@ -147,7 +147,7 @@ useEffect(()=>{
                 // onClick={() => navigate("/add-product")}
                 className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center"
             >
-            <Plus className="w-5 h-5 mr-2" />
+            <PenLine className="w-5 h-5 mr-2" />
                 Update Product
             </button>
             <FilterMenu onFilter={handlefilter} />

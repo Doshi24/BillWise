@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express from 'express';
 import cors from "cors"
 
 //express
@@ -6,25 +6,15 @@ const main = express();
 main.use(express.json());
 //cors
 main.use(cors())
-
-//import routes
-import router from './routes/product.route.js';
-
+import productrouter from './routes/product.route.js'
 //route use 
-
-main.use('/product', router);
-// main.use('/product', router);// for search
-// main.use('/product', router);// for select
-// main.use('/product', router);// for update
-// main.use('products',router); // for display
-// main.use('/product',router); //filter
-
-
+main.use('/product', productrouter);
 // downloads
-main.use('/product/list',router) 
-
-
-
+main.use('/product/list',productrouter) 
 // datalist
-main.use('/product', router);
+main.use('/product', productrouter);
+
+import suppliers_route from './routes/suppliers.route.js'
+main.use('/api',suppliers_route)
+
 export default main;

@@ -41,13 +41,13 @@ export default function LeftSideNav() {
         <Package className="w-5 h-5 mr-3" />
         Inventory
       </Link>
-          <a
-            href="#"
+          <Link
+            to = "/suppliers"
             className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white hover:rounded-lg font-medium"
           >
             <Truck className="w-5 h-5 mr-3" />
             Suppliers
-          </a>
+          </Link>
           <a
             href="#"
             className="flex items-center px-6 py-3 text-gray-700 hover:bg-black hover:text-white hover:rounded-lg font-medium"
