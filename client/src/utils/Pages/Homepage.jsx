@@ -5,6 +5,7 @@ import LeftSideNav from "./LeftSideNav"
 import TopNavbar from "./TopNavbar"
 import { ToastContainer } from "react-toastify";
 import Suppilers from "./Suppilers/Suppilers";
+import Suppilers_Page from "./Suppilers/Suppilers_Page";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function Homepage(){
     
@@ -29,7 +30,8 @@ function Homepage(){
               <Route path="/" element={<Dashboard />} />
               <Route path="/product" element={<ProductPage />} />
               <Route path="/add-product" element={<AddProduct />} />
-              <Route path= "/suppliers" element= {<Suppilers />}/>
+              <Route path ="/suppliers" element={<Suppilers_Page />} />
+              <Route path= "/add-suppliers" element= {<Suppilers />}/>
             </Routes>
           </div>
         </div>

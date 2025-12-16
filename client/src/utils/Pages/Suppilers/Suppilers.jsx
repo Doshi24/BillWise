@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Loader from "../../Loader";
 import showToast from "../../Toast";
 import { server_url } from "../../config";
-function Suppilers() {
+function Suppilers({onClose, onSuccess}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
     name: "",
@@ -36,8 +36,8 @@ function Suppilers() {
             notes: ""
         });
         // navigate("/product");
-        // if (onClose) onClose(); // close modal
-        // if (onSuccess) onSuccess(); // r
+        if (onClose) onClose(); // close modal
+        if (onSuccess) onSuccess(); // r
       } else {
         showToast("error", responseData.message ||"Failed to add product.");
       }
@@ -179,7 +179,7 @@ function Suppilers() {
         <div className="bg-gray-100 px-6 py-4 border-t flex justify-end gap-4">
         <button
           type="button"
-        //   onClick={onClose} // ✅ Close modal on Cancel
+          onClick={onClose} // ✅ Close modal on Cancel
           className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
         >
           Cancel
@@ -191,7 +191,7 @@ function Suppilers() {
             loading ? "bg-gray-400 cursor-not-allowed" : "bg-gray-900 hover:bg-black"
           }`}
         >
-          {loading ? <Loader type="dots" text="Saving..." /> : "Save Product"}
+          {loading ? <Loader type="dots" text="Saving..." /> : "Save Supplier "}  
         </button>
       </div>
       </form>
