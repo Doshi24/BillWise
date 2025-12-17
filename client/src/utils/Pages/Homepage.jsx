@@ -29,9 +29,9 @@ function Homepage(){
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/product" element={<ProductPage />} />
-              <Route path="/add-product" element={<AddProduct />} />
+              {/* <Route path="/add-product" element={<AddProduct />} /> */}
               <Route path ="/suppliers" element={<Suppilers_Page />} />
-              <Route path= "/add-suppliers" element= {<Suppilers />}/>
+              {/* <Route path= "/add-suppliers" element= {<Suppilers />}/> */}
             </Routes>
           </div>
         </div>

@@ -21,4 +21,12 @@ const Createsuppliers =  async (req, res) => {
 }
 
 
-export default Createsuppliers
+const displaysuppliers  = async (req, res) => {
+    var  dqry = {}
+    dqry = await sql("select * from Suppliers")
+    logger.info("Display product" +JSON.stringify(dqry))
+    return res.json({status: "success", error: "", message : "Product Displayed Successfully !!!" ,result : dqry });
+}
+
+
+export { Createsuppliers, displaysuppliers}

@@ -31,7 +31,7 @@ const AddProduct = ({onClose, onSuccess}) => {
     try {
       setLoading(true);
       console.log("Form submitted", formData);
-      const response = await fetch(`${server_url}/product/new`, {
+      const response = await fetch(`${server_url}/api/product/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

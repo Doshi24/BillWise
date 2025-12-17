@@ -23,7 +23,7 @@ import Updateproduct from "./UpdateProduct.jsx";
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await fetch(`${server_url}/product/display`);
+            const res = await fetch(`${server_url}/api/product/display`);
             const json = await res.json();
             setData(json.result || []);
           } catch (err) {
@@ -43,7 +43,7 @@ import Updateproduct from "./UpdateProduct.jsx";
         try {
         setFilters(filters);
         const filtersearch = new URLSearchParams(filters).toString();
-        const result = await fetch(`${server_url}/product/filter?${filtersearch}`);
+        const result = await fetch(`${server_url}/api/product/filter?${filtersearch}`);
         const displayresult = await result.json();
         setData(displayresult.result || []);
         setPage(1);
@@ -56,7 +56,7 @@ import Updateproduct from "./UpdateProduct.jsx";
       const handleDownload = () => {
         const query = new URLSearchParams(filters).toString();
         const link = document.createElement("a");
-        link.href = `${server_url}/product/list/download?${query}`;
+        link.href = `${server_url}/api/product/list/download?${query}`;
         link.setAttribute("download", "products.csv");
         document.body.appendChild(link);
         link.click();
@@ -72,13 +72,13 @@ useEffect(() => {
     try {
       if (searchquery.length >= 1) {
         // search API
-        const res = await fetch(`${server_url}/product/search?query=${searchquery}`);
+        const res = await fetch(`${server_url}/api/product/search?query=${searchquery}`);
         const result = await res.json();
         setData(result.result || []); // update table with search result
         setPage(1); // reset pagination
       } else {
         // fetch all products if search is empty
-        const res = await fetch(`${server_url}/product/display`);
+        const res = await fetch(`${server_url}/api/product/display`);
         const result = await res.json();
         setData(result.result || []); // update table with full product list
         setPage(1);
@@ -94,7 +94,7 @@ useEffect(() => {
 // fetch latest products 
 const fetchProducts = async () => {
   try {
-    const res = await fetch(`${server_url}/product/display`);
+    const res = await fetch(`${server_url}/api/product/display`);
     const json = await res.json();
     setData(json.result || []);
     setPage(1); // optional: reset to page 1

@@ -8,11 +8,11 @@ main.use(express.json());
 main.use(cors())
 import productrouter from './routes/product.route.js'
 //route use 
-main.use('/product', productrouter);
+main.use('/api/product', productrouter);
 // downloads
-main.use('/product/list',productrouter) 
+main.use('/api/product/list',productrouter) 
 // datalist
-main.use('/product', productrouter);
+main.use('/api/product', productrouter);
 
 import suppliers_route from './routes/suppliers.route.js'
 main.use('/api',suppliers_route)

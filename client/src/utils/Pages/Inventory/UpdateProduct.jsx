@@ -32,7 +32,7 @@ const Updateproduct = ({onClose , onSuccess}) => {
 useEffect(() => {
     try {
       if(searchquery.length >= 1){
-          fetch(`${server_url}/product/search?query=${searchquery}`) // note
+          fetch(`${server_url}/api/product/search?query=${searchquery}`) // note
           .then(res => res.json())
           .then(data => setsuggestion(data.result || []))
       }else{
@@ -48,7 +48,7 @@ useEffect(() => {
 const handleProductselect = async (product) => {
 
     try {
-     const response = await fetch(`${server_url}/product/select/${product.product_code}`)
+     const response = await fetch(`${server_url}/api/product/select/${product.product_code}`)
     //  console.log("respojes", response)
       if (response.ok) {
         const data = await response.json();
@@ -77,7 +77,7 @@ const handleProductselect = async (product) => {
 
     try {
         setLoading(true); // start loading
-        const response = await fetch(`${server_url}/product/update`, {
+        const response = await fetch(`${server_url}/api/product/update`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
