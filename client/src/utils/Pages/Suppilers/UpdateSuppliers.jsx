@@ -15,23 +15,20 @@ const UpdateSuppliers = ({onClose , onSuccess}) => {
   const [isdisabled, setisdisabled] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [formData, setFormData] = useState({
-    product_code: "",
     name: "",
-    description: "",
-    per_unit_price: "",
-    tax_rate: "",
-    tax_code_id: "",
-    category_id: "",
-    brand_id: "",
-    unit_of_measure: "",
-    stock_quantity: ""
+    email: "",
+    address: "",
+    phone: "",
+    category: "",
+    payment_terms: "",
+    notes: ""
   });
 
 //search product 
 useEffect(() => {
     try {
       if(searchquery.length >= 1){
-          fetch(`${server_url}/product/search?query=${searchquery}`) // note
+          fetch(`${server_url}/api/suppliers/search?query=${searchquery}`) // note
           .then(res => res.json())
           .then(data => setsuggestion(data.result || []))
       }else{
@@ -44,15 +41,15 @@ useEffect(() => {
 
 
 // on select suggestion
-const handleProductselect = async (product) => {
+const handleProductselect = async (suppilers) => {
 
     try {
-     const response = await fetch(`${server_url}/product/select/${product.product_code}`)
-    //  console.log("respojes", response)
+     const response = await fetch(`${server_url}/api/suppliers/select/${suppilers.name}`)
+     console.log("respojes", response)
       if (response.ok) {
         const data = await response.json();
         setFormData(data);
-        setsearchquery(product.product_code.trim());
+        setsearchquery(suppilers.name.trim());
         setsuggestion([]);
         setisdisabled(true);
       }
@@ -76,7 +73,7 @@ const handleProductselect = async (product) => {
 
     try {
         setLoading(true); // start loading
-        const response = await fetch(`${server_url}/product/update`, {
+        const response = await fetch(`${server_url}/api/suppliers/update`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
@@ -84,12 +81,13 @@ const handleProductselect = async (product) => {
       body: JSON.stringify(formData)
     });
     if (response.ok) {
-      showToast("success","Product updated successfully!");
+      showToast("success","suppliers updated successfully!");
       // setNotification({ type: "success", message: "Product added successfully!" });
-      setFormData({ name: "", description: "", price: "", quantity: "" });
+      setFormData({ name: "",email: "",address: "",phone: "",category: "",payment_terms: "",notes: "" });
       if (onClose) onClose(); // close modal
       if (onSuccess) onSuccess(); // r
     } else {
+      console.log("error")
     showToast( "info","Not Worked as Expected" );
   }
 }   catch (error) {
@@ -187,14 +185,14 @@ const handleProductselect = async (product) => {
             <ul className="absolute z-10 mt-1 w-300px bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto">
             {suggestions.map((item, index) => (
               <li
-                key={item.product_code}
+                key={item.name}
                 onClick={() => handleProductselect(item)}
                 className={`px-13 py-2 cursor-pointer  
                   ${highlightIndex === index 
                     ? "bg-gray-600 text-white" 
                     : "hover:bg-blue-100 text-gray-700"}`}
               >
-                <span className="font-medium"> {item.product_code}</span>
+                <span className="font-medium"> {item.name}</span>
                 {/* <span className="ml-2 text-sm font-medium">Product Name: {item.name}</span> */}
                 </li>
                 ))}

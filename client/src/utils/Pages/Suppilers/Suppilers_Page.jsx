@@ -2,7 +2,6 @@
     import { Download, Filter, Plus , Search , PenLine} from "lucide-react";
     import { server_url } from "../../config.js";
     import FilterMenu from "../FilterMenu.jsx";
-    import AddProduct from "../Inventory/AddProduct.jsx"
     import { useNavigate } from "react-router-dom";
     import Suppilers from "../Suppilers/Suppilers.jsx";
     import UpdateSuppliers from "./UpdateSuppliers.jsx";
@@ -11,7 +10,7 @@
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const itemsPerPage = 8;
-    const [filters, setFilters] = useState({ product_code: "", name: "" });
+    const [filters, setFilters] = useState({ id: "", name: "" });
     const [search, setSearch] = useState("");
     const [showAddForm, setShowAddForm] = useState(false);
     const navigate = useNavigate();
@@ -28,7 +27,7 @@
             const json = await res.json();
             setData(json.result || []);
           } catch (err) {
-            console.error("❌ Error fetching products:", err);
+            console.error("❌ Error fetching suppliers:", err);
           }
         };
         fetchData();
@@ -39,30 +38,30 @@
     const endIndex = startIndex + itemsPerPage;
     const currentItems = data.slice(startIndex, endIndex);
 
-    //   // Filter logic
-    const handlefilter = async (filters) => {
-        try {
-        setFilters(filters);
-        const filtersearch = new URLSearchParams(filters).toString();
-        const result = await fetch(`${server_url}/api/product/filter?${filtersearch}`);
-        const displayresult = await result.json();
-        setData(displayresult.result || []);
-        setPage(1);
-        } catch (error) {
-        console.log("filter logic didn’t work", error);
-        }
-    };
+    // //   // Filter logic
+    // const handlefilter = async (filters) => {
+    //     try {
+    //     setFilters(filters);
+    //     const filtersearch = new URLSearchParams(filters).toString();
+    //     const result = await fetch(`${server_url}/api/suppliers/filter?${filtersearch}`);
+    //     const displayresult = await result.json();
+    //     setData(displayresult.result || []);
+    //     setPage(1);
+    //     } catch (error) {
+    //     console.log("filter logic didn’t work", error);
+    //     }
+    // };
 
-      // Download CSV
-      const handleDownload = () => {
-        const query = new URLSearchParams(filters).toString();
-        const link = document.createElement("a");
-        link.href = `${server_url}/api/product/list/download?${query}`;
-        link.setAttribute("download", "products.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      };
+      // // Download CSV
+      // const handleDownload = () => {
+      //   const query = new URLSearchParams(filters).toString();
+      //   const link = document.createElement("a");
+      //   link.href = `${server_url}/api/suppliers/list/download?${query}`;
+      //   link.setAttribute("download", "suppliers.csv");
+      //   document.body.appendChild(link);
+      //   link.click();
+      //   document.body.removeChild(link);
+      // };
 
 
       // seach product logic
@@ -73,7 +72,7 @@ useEffect(() => {
     try {
       if (searchquery.length >= 1) {
         // search API
-        const res = await fetch(`${server_url}/api/product/search?query=${searchquery}`);
+        const res = await fetch(`${server_url}/api/suppliers/search?query=${searchquery}`);
         const result = await res.json();
         setData(result.result || []); // update table with search result
         setPage(1); // reset pagination
@@ -85,7 +84,7 @@ useEffect(() => {
         setPage(1);
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching suppliers:", error);
     }
   };
 
@@ -100,7 +99,7 @@ const fetchProducts = async () => {
     setData(json.result || []);
     setPage(1); // optional: reset to page 1
   } catch (err) {
-    console.error("❌ Error fetching products:", err);
+    console.error("❌ Error fetching suppliers:", err);
   }
 };
 useEffect(()=>{
@@ -151,14 +150,14 @@ useEffect(()=>{
             <PenLine className="w-5 h-5 mr-2" />
                 Update Suppliers
             </button>
-            <FilterMenu onFilter={handlefilter} />
-            <button
+            {/* <FilterMenu onFilter={handlefilter} /> */}
+            {/* <button
                 onClick={handleDownload}
                 className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 flex items-center"
             >
                 <Download className="w-5 h-5 mr-2" />
                 Download
-            </button>
+            </button> */}
             </div>
         </div>
         {showAddForm && (
